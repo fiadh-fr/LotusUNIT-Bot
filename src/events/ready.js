@@ -104,6 +104,48 @@ module.exports = {
       });
     }
 
+    //Announcements Embed Channel
+    const announcementEmbedChannel = guild.channels.cache.get(config.announcementEmbedChannel);
+    const announcementEmbedMessage = (
+      await announcementEmbedChannel?.messages?.fetch({ limit: 1 }).catch(() => null)
+    )?.first();
+
+    if (!announcementEmbedMessage || announcementEmbedMessage.author.id !== client.user.id) {
+      const announcementEmbed = new EmbedBuilder()
+        .setTitle(
+          `${config.formChannelData.developerFormEmoji} - Inscrição para Desenvolvedor`
+        )
+        .setImage(config.formChannelData.welcomeEmbedBanner)
+        .setColor(config.formChannelData.welcomeEmbedColor)
+        .setFooter(config.footerEmbeds)
+        .setDescription(
+          `\n__**Seja muito bem-vindo à central da Black Lotus.**__\n\n` +
+            `***Estamos empolgados em tê-lo conosco! Para um começo auspicioso, certifique-se de estar ciente dos seguintes pontos e de seguir os requisitos que serão listados aqui.***\n\n` +
+            `<a:1_laydowntorest:1042548347715727390> **|** *Ao entrar no servidor, você recebeu o cargo <@&896874533519237120>, que será atualizado para <@&897309181017722910> assim que você completar todos os passos necessários para a sua inscrição.*\n\n` +
+            `<a:1_laydowntorest:1042548347715727390> **|** *Por favor, evite silenciar o ping "@everyone" e outros cargos do nosso servidor. Isso é necessário para garantir uma boa comunicação entre os membros do servidor e a Black Lotus.*\n\n` +
+            `<a:1_laydowntorest:1042548347715727390> **|** *Lembramos que nossa equipe realizará uma avaliação em seu perfil para verificar se ele atende a todos os requisitos necessários para fazer parte da associação. Como esse processo envolve avaliação humana, pedimos que tenha paciência durante o processo de análise.*\n\n` +
+            `<a:1_laydowntorest:1042548347715727390> **|** *Mantenha o seu chat privado aberto (DM) para que possamos entrar em contato caso necessário. É importante destacar que a confirmação oficial da sua entrada na Black Lotus será enviada pelo bot por meio do chat privado.*\n\n` +
+            `__**Requisitos de inscrição:**__\n\n` +
+            `<a:1_verified:1055293708825808947> **|** *Apresentar um portfólio de projetos anteriores que demonstre suas habilidades como desenvolvedor. Esse portfólio pode ser devidamente documentado no [Github](https://github.com/) ou em outra plataforma equivalente.*\n\n` +
+            `<a:1_verified:1055293708825808947> **|** *Cumprir com os [Termos de Serviço (TOS)](https://discord.com/terms) da plataforma Discord.*\n\n` +
+            `<a:1_verified:1055293708825808947> **|** *Cumprir com os Termos da associação [Black Lotus](https://theblacklotus.fr/terms-of-service.html).*\n\n` +
+            `**Fique à vontade para entrar em contato conosco. Nossa equipe está pronta para ajudá-lo em qualquer questão relacionada à nossa organização.** https://discord.com/channels/896047806454837278/1121350824778534922\n\n`
+        );
+
+      const row = new ActionRowBuilder().setComponents(
+        new ButtonBuilder()
+          .setLabel(" - Saiba mais!")
+          .setStyle(ButtonStyle.Link)
+          .setEmoji(config.formChannelData.siteEmoji)
+          .setURL("https://theblacklotus.fr/")
+      );
+
+      announcementEmbedChannel.send({
+        embeds: [announcementEmbed],
+        components: [row],
+      });
+    }
+
     //Developer embed form
     const devFormChannel = guild.channels.cache.get(config.devFormChannel);
     const devFormMessage = (

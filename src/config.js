@@ -29,6 +29,7 @@ module.exports = {
   lotusUnit: "1148583954706862120", // Bot ID
   guild: "896047806454837278", // Server ID
   welcomeEmbedChannel: "1043271233153814609", // Server welcome channel ID
+  announcementEmbedChannel: "1115720823387471922",
   aproveChannel: "1154848167100153866", // Approve channel for all the request forms
   devFormChannel: "1148594636047274077", // Developer form channel
   modFormChannel: "1149369047532699668", // Moderator form channel
